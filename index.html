@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="list.js"></script>
+  <script>
+    window.addEventListener("load", function() {
+      let input = document.querySelector("#link-input")
+      let feedback = document.querySelector("#feedback")
+      input.addEventListener('input', function(e) {
+        console.log("changed")
+        let match = this.value.match(/[\w\d\-_]{15,}/)
+        if (match) {
+          feedback.classList.remove("error")
+          if (ids.includes(match[0])) {
+            feedback.innerHTML = "This link points to a file on the new Shared Drive."
+          } else {
+            feedback.classList.add("error")
+            feedback.innerHTML = "This link doesn't seem to be on the new Shared Drive."
+          }
+        } else {
+          feedback.classList.add("error")
+          feedback.innerHTML = "Sorry, I can't read that link.<br/>Are you sure it's a Google (Drive/Doc/Spreadheet) link?"
+        }
+      })
+    })
+  </script>
+  <link href="style.css" rel="stylesheet">
+  <title>Drive Link Decipherer</title>
+</head>
+<body>
+  <span id="last-updated">Index last updated 29 Dec 2021</span>
+  <span id="instructions">Paste the Google drive/doc/spreadsheet link below to find out if it's on the new Shared Drive:</span>
+  <input id="link-input" type="text">
+  <span id="feedback"></span>
+</body>
+</html>
